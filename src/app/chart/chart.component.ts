@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Values } from './values';
 import * as Chart from 'chart.js';
+import {ChartService} from "./chart.service";
+import { map } from 'rxjs/operators'
+import {Values} from "./values";
 
 @Component({
   selector: 'app-chart',
@@ -11,25 +13,22 @@ import * as Chart from 'chart.js';
 export class ChartComponent implements OnInit {
 
   chart = [];
-  public barChartOption = {
-   responsive: true
-  };
 
-  public chartType= 'bar';
   data =[]
   label = []
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private chartService: ChartService
   ) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/readValues').subscribe((res: Values[]) => {
+    this.chartService.takeValues().subscribe((res: Values[]) => {
       res.forEach(y => {
         this.label.push(y.year);
         this.data.push(y.averageForYear);
-      });
+
       this.chart = new Chart('canvas', {
         type: 'bar',
         data: {
@@ -53,13 +52,14 @@ export class ChartComponent implements OnInit {
             }],
             yAxes: [{
               display: true
-            }],
+            }]
           }
         }
-      });
-    });
-  }
+      })
 
-  }
+    })
+  });
+}
+}
 
 
