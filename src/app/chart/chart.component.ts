@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Chart from 'chart.js';
 import {ChartService} from "./chart.service";
-import { map } from 'rxjs/operators'
 import {Values} from "./values";
 
 @Component({
@@ -28,7 +27,7 @@ export class ChartComponent implements OnInit {
       res.forEach(y => {
         this.label.push(y.year);
         this.data.push(y.averageForYear);
-
+      });
       this.chart = new Chart('canvas', {
         type: 'bar',
         data: {
@@ -56,8 +55,6 @@ export class ChartComponent implements OnInit {
           }
         }
       })
-
-    })
   });
 }
 }
