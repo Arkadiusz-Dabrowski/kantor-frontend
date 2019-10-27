@@ -27,7 +27,7 @@ export class ChartComponent implements OnInit {
         this.label.push(y.year);
         this.data.push(y.averageForYear);
       });
-      this.chart = new Chart('canvas', {
+      this.chart.push( new Chart('canvas', {
         type: 'bar',
         data: {
           labels: this.label,
@@ -53,7 +53,7 @@ export class ChartComponent implements OnInit {
             }]
           }
         }
-      });
+      }));
   });
 }
 }
