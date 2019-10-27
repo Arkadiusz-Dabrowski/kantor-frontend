@@ -12,9 +12,8 @@ import {Values} from "./values";
 export class ChartComponent implements OnInit {
 
   chart = [];
-
-  data =[]
-  label = []
+  data =[];
+  label = [];
 
 
   constructor(
@@ -54,7 +53,7 @@ export class ChartComponent implements OnInit {
             }]
           }
         }
-      })
+      });
   });
 }
 }
